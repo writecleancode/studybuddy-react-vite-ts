@@ -11,7 +11,7 @@ export const StyledListItem = styled.li`
 	}
 `;
 
-export const StyledAverage = styled.div<{ $average: number }>`
+export const StyledAverage = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
