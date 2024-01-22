@@ -1,3 +1,5 @@
+import { StudentsList } from 'src/components/organisms/StudentsList/StudentsList';
+
 export const Root = () => {
-  return (<div>Test test test</div>)
+	return <StudentsList />;
 };
