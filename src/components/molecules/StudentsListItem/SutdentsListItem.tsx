@@ -1,7 +1,7 @@
 import { StyledInfo } from 'src/components/atoms/StyledInfo/StyledInfo';
 import { DeleteButton } from 'src/components/atoms/DeleteButton/DeleteButton';
 import { StyledAverage, StyledListItem } from './StudentsListItem.styles';
-import { StudentType } from 'src/components/organisms/StudentsList/StudentsList';
+import { StudentType } from 'src/views/Root';
 
 type StudentsListItemProps = {
 	studentData: StudentType;

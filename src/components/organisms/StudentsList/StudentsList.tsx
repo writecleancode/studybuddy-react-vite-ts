@@ -1,48 +1,16 @@
-import { students as studentsData } from 'src/data/students';
 import { StudentsListItem } from 'src/components/molecules/StudentsListItem/SutdentsListItem';
-import { StyledList, Wrapper } from './StudentsList.styles';
-import { useEffect, useState } from 'react';
+import { StyledList, StyledTitle, Wrapper } from './StudentsList.styles';
+import { StudentType } from 'src/views/Root';
 
-export type StudentType = {
-	name: string;
-	attendance: string;
-	average: string;
+type StudentsListType = {
+	students: StudentType[];
+	handleDeleteStudent: (name: string) => void;
 };
 
-const mockAPI = () => {
-	return new Promise((resolve, reject) => {
-		setTimeout(() => {
-			if (studentsData) {
-				resolve([...studentsData]);
-			} else {
-				reject({ message: 'Error' });
-			}
-		}, 2000);
-	});
-};
-
-export const StudentsList = () => {
-	const [students, setStudents] = useState<never[] | StudentType[]>([]);
-	const [isLoading, setLoadingState] = useState(false);
-
-	const handleDeleteStudent = (name: string) => {
-		const filteredStudents = students.filter(student => student.name !== name);
-		setStudents(filteredStudents);
-	};
-
-	useEffect(() => {
-		setLoadingState(true);
-		mockAPI()
-			.then((data: any) => {
-				setLoadingState(false);
-				setStudents(data);
-			})
-			.catch(err => console.log(err));
-	}, [studentsData]);
-
+export const StudentsList = ({ students, handleDeleteStudent }: StudentsListType) => {
 	return (
 		<Wrapper>
-			<h1>{isLoading ? 'Loading...' : 'Students list'}</h1>
+			<StyledTitle>Students list</StyledTitle>
 			<StyledList>
 				{students.map(studentData => (
 					<StudentsListItem
