@@ -1,22 +1,22 @@
 import { StyledInfo } from 'src/components/atoms/StyledInfo/StyledInfo';
 import { DeleteButton } from 'src/components/atoms/DeleteButton/DeleteButton';
 import { StyledAverage, StyledListItem } from './StudentsListItem.styles';
+import { StudentType } from 'src/components/organisms/StudentsList/StudentsList';
 
 type StudentsListItemProps = {
-	studentData: {
-		name: string;
-		attendance: string;
-		average: string;
-	};
-	index: number;
+	studentData: StudentType;
+	handleDeleteStudent: (name: string) => void;
 };
 
-export const StudentsListItem = ({ studentData: { name, attendance, average }, index }: StudentsListItemProps) => {
+export const StudentsListItem = ({
+	studentData: { name, attendance, average },
+	handleDeleteStudent,
+}: StudentsListItemProps) => {
 	return (
 		<StyledListItem>
 			<StyledAverage $average={Number(average)}>{average}</StyledAverage>
 			<StyledInfo name={name} attendance={attendance} />
-			<DeleteButton onClick={() => alert(`This is Students #${index + 1}`)} />
+			<DeleteButton onClick={() => handleDeleteStudent(name)} />
 		</StyledListItem>
 	);
 };
