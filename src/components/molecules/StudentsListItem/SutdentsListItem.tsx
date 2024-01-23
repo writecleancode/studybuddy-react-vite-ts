@@ -8,14 +8,15 @@ type StudentsListItemProps = {
 		attendance: string;
 		average: string;
 	};
+	index: number;
 };
 
-export const StudentsListItem = ({ studentData: { name, attendance, average } }: StudentsListItemProps) => {
+export const StudentsListItem = ({ studentData: { name, attendance, average }, index }: StudentsListItemProps) => {
 	return (
 		<StyledListItem>
 			<StyledAverage $average={Number(average)}>{average}</StyledAverage>
 			<StyledInfo name={name} attendance={attendance} />
-			<DeleteButton />
+			<DeleteButton onClick={() => alert(`This is Students #${index + 1}`)} />
 		</StyledListItem>
 	);
 };
