@@ -1,26 +1,18 @@
-import { FormEvent, useState } from 'react';
+import { FormEvent } from 'react';
 import { FormField } from 'src/components/molecules/FormField/FormField';
 import { Button } from 'src/components/atoms/Button/StyledButton';
 import { StyledTitle, Wrapper } from '../StudentsList/StudentsList.styles';
+import { StudentType } from 'src/views/Root';
 
-const initialFormValues = {
-	name: '',
-	attendance: '',
-	average: '',
+type FormProps = {
+	formValues: StudentType;
+	handleInputChange: (e: FormEvent<HTMLInputElement>) => void;
+	handleAddStudent: (e: FormEvent) => void;
 };
 
-export const Form = () => {
-	const [formValues, setFormValues] = useState(initialFormValues);
-
-	const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-		setFormValues({
-			...formValues,
-			[e.currentTarget.name]: e.currentTarget.value,
-		});
-	};
-
+export const Form = ({ formValues, handleInputChange, handleAddStudent }: FormProps) => {
 	return (
-		<Wrapper>
+		<Wrapper as='form' onSubmit={handleAddStudent}>
 			<StyledTitle>Add new student</StyledTitle>
 			<FormField label='Name' name='name' id='name' value={formValues.name} onChange={handleInputChange} />
 			<FormField
@@ -31,7 +23,7 @@ export const Form = () => {
 				onChange={handleInputChange}
 			/>
 			<FormField label='Average' name='average' id='average' value={formValues.average} onChange={handleInputChange} />
-			<Button>Add</Button>
+			<Button type='submit'>Add</Button>
 		</Wrapper>
 	);
 };

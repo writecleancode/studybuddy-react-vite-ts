@@ -1,22 +1,13 @@
-import { useState } from 'react';
-import { students as studentsData } from 'src/data/students';
 import { StudentsListItem } from 'src/components/molecules/StudentsListItem/SutdentsListItem';
 import { StyledList, StyledTitle, Wrapper } from './StudentsList.styles';
+import { StudentType } from 'src/views/Root';
 
-export type StudentType = {
-	name: string;
-	attendance: string;
-	average: string;
+type StudentsListType = {
+	students: StudentType[];
+	handleDeleteStudent: (name: string) => void;
 };
 
-export const StudentsList = () => {
-	const [students, setStudents] = useState<never[] | StudentType[]>(studentsData);
-
-	const handleDeleteStudent = (name: string) => {
-		const filteredStudents = students.filter(student => student.name !== name);
-		setStudents(filteredStudents);
-	};
-
+export const StudentsList = ({ students, handleDeleteStudent }: StudentsListType) => {
 	return (
 		<Wrapper>
 			<StyledTitle>Students list</StyledTitle>
