@@ -1,11 +1,12 @@
 import { FormEvent, useState } from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { students as studentsData } from 'src/data/students';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'src/assets/styles/theme';
 import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
-import { students as studentsData } from 'src/data/students';
-import { StudentsList } from 'src/components/organisms/StudentsList/StudentsList';
-import { Form } from 'src/components/organisms/Form/Form';
+import { MainTemplate } from 'src/components/templates/MainTemplate/MainTemplate';
+import { Dashboard } from './Dashboard';
+import { AddStudent } from './AddStudent';
 import { Wrapper } from './Root.styles';
 
 export type StudentType = {
@@ -53,25 +54,23 @@ export const Root = () => {
 		<Router>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				<Wrapper>
-					<nav>
-						<Link to='/'>Home</Link>
-						<Link to='/add-student'>Add student</Link>
-					</nav>
-					<Routes>
-						<Route path='/' element={<StudentsList students={students} handleDeleteStudent={handleDeleteStudent} />} />
-						<Route
-							path='/add-student'
-							element={
-								<Form
-									formValues={formValues}
-									handleInputChange={handleInputChange}
-									handleAddStudent={handleAddStudent}
-								/>
-							}
-						/>
-					</Routes>
-				</Wrapper>
+				<MainTemplate>
+					<Wrapper>
+						<Routes>
+							<Route path='/' element={<Dashboard students={students} handleDeleteStudent={handleDeleteStudent} />} />
+							<Route
+								path='/add-student'
+								element={
+									<AddStudent
+										formValues={formValues}
+										handleInputChange={handleInputChange}
+										handleAddStudent={handleAddStudent}
+									/>
+								}
+							/>
+						</Routes>
+					</Wrapper>
+				</MainTemplate>
 			</ThemeProvider>
 		</Router>
 	);

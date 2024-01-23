@@ -1,7 +1,8 @@
 import { FormEvent } from 'react';
+import { ViewWrapper } from 'src/components/molecules/ViewWrapper/ViewWrapper';
+import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { FormField } from 'src/components/molecules/FormField/FormField';
 import { Button } from 'src/components/atoms/Button/StyledButton';
-import { StyledTitle, Wrapper } from '../StudentsList/StudentsList.styles';
 import { StudentType } from 'src/views/Root';
 
 type FormProps = {
@@ -10,9 +11,9 @@ type FormProps = {
 	handleAddStudent: (e: FormEvent) => void;
 };
 
-export const Form = ({ formValues, handleInputChange, handleAddStudent }: FormProps) => {
+export const AddStudent = ({ formValues, handleInputChange, handleAddStudent }: FormProps) => {
 	return (
-		<Wrapper as='form' onSubmit={handleAddStudent}>
+		<ViewWrapper as='form' onSubmit={handleAddStudent}>
 			<StyledTitle>Add new student</StyledTitle>
 			<FormField label='Name' name='name' id='name' value={formValues.name} onChange={handleInputChange} />
 			<FormField
@@ -24,6 +25,6 @@ export const Form = ({ formValues, handleInputChange, handleAddStudent }: FormPr
 			/>
 			<FormField label='Average' name='average' id='average' value={formValues.average} onChange={handleInputChange} />
 			<Button type='submit'>Add</Button>
-		</Wrapper>
+		</ViewWrapper>
 	);
 };

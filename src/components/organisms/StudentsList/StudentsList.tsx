@@ -1,5 +1,6 @@
 import { StudentsListItem } from 'src/components/molecules/StudentsListItem/SutdentsListItem';
-import { StyledList, StyledTitle, Wrapper } from './StudentsList.styles';
+import { StyledList } from './StudentsList.styles';
+import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { StudentType } from 'src/views/Root';
 
 type StudentsListType = {
@@ -9,7 +10,7 @@ type StudentsListType = {
 
 export const StudentsList = ({ students, handleDeleteStudent }: StudentsListType) => {
 	return (
-		<Wrapper>
+		<>
 			<StyledTitle>Students list</StyledTitle>
 			<StyledList>
 				{students.map(studentData => (
@@ -20,6 +21,6 @@ export const StudentsList = ({ students, handleDeleteStudent }: StudentsListType
 					/>
 				))}
 			</StyledList>
-		</Wrapper>
+		</>
 	);
 };
