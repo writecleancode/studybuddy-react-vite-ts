@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'src/assets/styles/theme';
 import { GlobalStyle } from 'src/assets/styles/GlobalStyle';
@@ -49,12 +50,29 @@ export const Root = () => {
 	};
 
 	return (
-		<ThemeProvider theme={theme}>
-			<GlobalStyle />
-			<Wrapper>
-				<Form formValues={formValues} handleInputChange={handleInputChange} handleAddStudent={handleAddStudent} />
-				<StudentsList students={students} handleDeleteStudent={handleDeleteStudent} />
-			</Wrapper>
-		</ThemeProvider>
+		<Router>
+			<ThemeProvider theme={theme}>
+				<GlobalStyle />
+				<Wrapper>
+					<nav>
+						<Link to='/'>Home</Link>
+						<Link to='/add-student'>Add student</Link>
+					</nav>
+					<Routes>
+						<Route path='/' element={<StudentsList students={students} handleDeleteStudent={handleDeleteStudent} />} />
+						<Route
+							path='/add-student'
+							element={
+								<Form
+									formValues={formValues}
+									handleInputChange={handleInputChange}
+									handleAddStudent={handleAddStudent}
+								/>
+							}
+						/>
+					</Routes>
+				</Wrapper>
+			</ThemeProvider>
+		</Router>
 	);
 };
