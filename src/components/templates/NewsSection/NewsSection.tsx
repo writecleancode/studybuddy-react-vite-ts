@@ -14,6 +14,21 @@ type articleType = {
 	};
 };
 
+export const query = `
+{
+  allArticles {
+    id
+    title
+    category
+    content
+    image {
+      url
+      alt
+    }
+  }
+}
+`;
+
 export const NewsSection = () => {
 	const [articles, setArticles] = useState<never[] | articleType[]>([]);
 	const [error, setError] = useState('');
@@ -23,20 +38,7 @@ export const NewsSection = () => {
 			.post(
 				'https://graphql.datocms.com/',
 				{
-					query: `
-						{
-							allArticles {
-								id
-								title
-								category
-								content
-								image {
-									url
-									alt
-								}
-							}
-						}
-					`,
+					query,
 				},
 				{
 					headers: {
