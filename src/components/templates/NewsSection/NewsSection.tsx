@@ -14,8 +14,6 @@ type articleType = {
 	};
 };
 
-const DATO_TOKEN = 'da4e120f3de32f16d2570730ea60a2';
-
 export const NewsSection = () => {
 	const [articles, setArticles] = useState<never[] | articleType[]>([]);
 	const [error, setError] = useState('');
@@ -42,7 +40,7 @@ export const NewsSection = () => {
 				},
 				{
 					headers: {
-						Authorization: `Bearer ${DATO_TOKEN}`,
+						Authorization: `Bearer ${import.meta.env.VITE_DATOCMS_TOKEN}`,
 					},
 				}
 			)
