@@ -1,17 +1,16 @@
 import { StyledInfo } from 'src/components/atoms/StyledInfo/StyledInfo';
 import { DeleteButton } from 'src/components/atoms/DeleteButton/DeleteButton';
 import { StyledAverage, StyledListItem } from './StudentsListItem.styles';
-import { StudentType } from 'src/views/Root';
+import { StudentType, StudentsContext } from 'src/views/Root';
+import { useContext } from 'react';
 
 type StudentsListItemProps = {
 	studentData: StudentType;
-	handleDeleteStudent: (name: string) => void;
 };
 
-export const StudentsListItem = ({
-	studentData: { name, attendance, average },
-	handleDeleteStudent,
-}: StudentsListItemProps) => {
+export const StudentsListItem = ({ studentData: { name, attendance, average } }: StudentsListItemProps) => {
+	const { handleDeleteStudent } = useContext(StudentsContext);
+
 	return (
 		<StyledListItem>
 			<StyledAverage $average={Number(average)}>{average}</StyledAverage>

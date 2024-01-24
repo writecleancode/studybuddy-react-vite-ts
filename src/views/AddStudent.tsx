@@ -1,19 +1,35 @@
-import { FormEvent } from 'react';
+import { FormEvent, useContext, useState } from 'react';
+import { StudentsContext } from 'src/views/Root';
 import { ViewWrapper } from 'src/components/molecules/ViewWrapper/ViewWrapper';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { FormField } from 'src/components/molecules/FormField/FormField';
 import { Button } from 'src/components/atoms/Button/StyledButton';
-import { StudentType } from 'src/views/Root';
 
-type FormProps = {
-	formValues: StudentType;
-	handleInputChange: (e: FormEvent<HTMLInputElement>) => void;
-	handleAddStudent: (e: FormEvent) => void;
+const initialFormValues = {
+	name: '',
+	attendance: '',
+	average: '',
 };
 
-export const AddStudent = ({ formValues, handleInputChange, handleAddStudent }: FormProps) => {
+export const AddStudent = () => {
+	const [formValues, setFormValues] = useState(initialFormValues);
+	const { handleAddStudent } = useContext(StudentsContext);
+
+	const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
+		setFormValues({
+			...formValues,
+			[e.currentTarget.name]: e.currentTarget.value,
+		});
+	};
+
+	const handleSubmitForm = (e: FormEvent) => {
+		e.preventDefault();
+		handleAddStudent(formValues);
+		setFormValues(initialFormValues);
+	};
+
 	return (
-		<ViewWrapper as='form' onSubmit={handleAddStudent}>
+		<ViewWrapper as='form' onSubmit={handleSubmitForm}>
 			<StyledTitle>Add new student</StyledTitle>
 			<FormField label='Name' name='name' id='name' value={formValues.name} onChange={handleInputChange} />
 			<FormField

@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { createContext, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { students as studentsData } from 'src/data/students';
 import { ThemeProvider } from 'styled-components';
@@ -15,62 +15,54 @@ export type StudentType = {
 	average: string;
 };
 
-const initialFormValues = {
-	name: '',
-	attendance: '',
-	average: '',
+type StudentsContextType = {
+	students: StudentType[];
+	handleDeleteStudent: (name: string) => void;
+	handleAddStudent: (formValues: StudentType) => void;
 };
+
+export const StudentsContext = createContext<StudentsContextType>({
+	students: [],
+	handleDeleteStudent: () => {},
+	handleAddStudent: () => {},
+});
 
 export const Root = () => {
 	const [students, setStudents] = useState(studentsData);
-	const [formValues, setFormValues] = useState(initialFormValues);
 
 	const handleDeleteStudent = (name: string) => {
 		const filteredStudents = students.filter(student => student.name !== name);
 		setStudents(filteredStudents);
 	};
 
-	const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-		setFormValues({
-			...formValues,
-			[e.currentTarget.name]: e.currentTarget.value,
-		});
-	};
-
-	const handleAddStudent = (e: FormEvent) => {
-		e.preventDefault();
-
+	const handleAddStudent = (formValues: StudentType) => {
 		const newStudent = {
 			name: formValues.name,
 			attendance: formValues.attendance,
 			average: formValues.average,
 		};
 		setStudents([newStudent, ...students]);
-
-		setFormValues(initialFormValues);
 	};
 
 	return (
 		<Router>
 			<ThemeProvider theme={theme}>
-				<GlobalStyle />
-				<MainTemplate>
-					<Wrapper>
-						<Routes>
-							<Route path='/' element={<Dashboard students={students} handleDeleteStudent={handleDeleteStudent} />} />
-							<Route
-								path='/add-student'
-								element={
-									<AddStudent
-										formValues={formValues}
-										handleInputChange={handleInputChange}
-										handleAddStudent={handleAddStudent}
-									/>
-								}
-							/>
-						</Routes>
-					</Wrapper>
-				</MainTemplate>
+				<StudentsContext.Provider
+					value={{
+						students,
+						handleDeleteStudent,
+						handleAddStudent,
+					}}>
+					<GlobalStyle />
+					<MainTemplate>
+						<Wrapper>
+							<Routes>
+								<Route path='/' element={<Dashboard />} />
+								<Route path='/add-student' element={<AddStudent />} />
+							</Routes>
+						</Wrapper>
+					</MainTemplate>
+				</StudentsContext.Provider>
 			</ThemeProvider>
 		</Router>
 	);

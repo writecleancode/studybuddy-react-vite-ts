@@ -1,24 +1,18 @@
 import { StudentsListItem } from 'src/components/molecules/StudentsListItem/SutdentsListItem';
 import { StyledList } from './StudentsList.styles';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
-import { StudentType } from 'src/views/Root';
+import { StudentsContext } from 'src/views/Root';
+import { useContext } from 'react';
 
-type StudentsListType = {
-	students: StudentType[];
-	handleDeleteStudent: (name: string) => void;
-};
+export const StudentsList = () => {
+	const { students } = useContext(StudentsContext);
 
-export const StudentsList = ({ students, handleDeleteStudent }: StudentsListType) => {
 	return (
 		<>
 			<StyledTitle>Students list</StyledTitle>
 			<StyledList>
 				{students.map(studentData => (
-					<StudentsListItem
-						key={studentData.name}
-						studentData={studentData}
-						handleDeleteStudent={handleDeleteStudent}
-					/>
+					<StudentsListItem key={studentData.name} studentData={studentData} />
 				))}
 			</StyledList>
 		</>
