@@ -8,8 +8,8 @@ type FormFieldProps = {
 	name: string;
 	id: string;
 	type?: string;
-	value: string;
-	onChange: (e: FormEvent<HTMLInputElement>) => void;
+	value?: string;
+	onChange?: (e: FormEvent<HTMLInputElement>) => void;
 };
 
 export const FormField = ({ label, name, id, type = 'text', value, onChange }: FormFieldProps) => {
