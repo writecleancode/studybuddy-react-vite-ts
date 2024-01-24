@@ -5,6 +5,5 @@ export const Wrapper = styled.div`
 	justify-content: center;
 	align-items: center;
 	padding: 64px;
-	height: 100vh;
 	background-color: ${({ theme }) => theme.colors.lightGrey};
 `;
