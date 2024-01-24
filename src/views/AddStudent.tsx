@@ -21,21 +21,28 @@ const initialFormState = {
 	error: '',
 };
 
+const actionTypes = {
+	inputChange: 'INPUT CHANGE',
+	clearValues: 'CLEAR VALUES',
+	toggleConsent: 'TOGGLE CONSENT',
+	throwError: 'THROW ERROR',
+};
+
 const reducer = (state: stateType, action: Record<string, string>) => {
 	switch (action.type) {
-		case 'INPUT CHANGE':
+		case actionTypes.inputChange:
 			return {
 				...state,
 				[action.field]: action.value,
 			};
-		case 'CLEAR VALUES':
+		case actionTypes.clearValues:
 			return initialFormState;
-		case 'TOGGLE CONSENT':
+		case actionTypes.toggleConsent:
 			return {
 				...state,
 				consent: !state.consent,
 			};
-		case 'THROW ERROR':
+		case actionTypes.throwError:
 			return {
 				...state,
 				error: action.errorValue,
@@ -50,13 +57,13 @@ export const AddStudent = () => {
 	const { handleAddStudent } = useContext(StudentsContext);
 
 	const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-		dispatch({ type: 'INPUT CHANGE', field: e.currentTarget.name, value: e.currentTarget.value });
+		dispatch({ type: actionTypes.inputChange, field: e.currentTarget.name, value: e.currentTarget.value });
 	};
 
 	const handleSubmitForm = (e: FormEvent) => {
 		e.preventDefault();
 		if (formValues.consent) {
-			dispatch({ type: 'CLEAR VALUES' });
+			dispatch({ type: actionTypes.clearValues });
 			handleAddStudent(formValues);
 		} else {
 			handleThrowError('You need to give consent');
@@ -64,11 +71,11 @@ export const AddStudent = () => {
 	};
 
 	const handleConsentToggle = () => {
-		dispatch({ type: 'TOGGLE CONSENT' });
+		dispatch({ type: actionTypes.toggleConsent });
 	};
 
 	const handleThrowError = (errorMessage: string) => {
-		dispatch({ type: 'THROW ERROR', errorValue: errorMessage });
+		dispatch({ type: actionTypes.throwError, errorValue: errorMessage });
 	};
 
 	return (
