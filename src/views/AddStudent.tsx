@@ -1,5 +1,5 @@
 import { FormEvent, useContext, useState } from 'react';
-import { StudentsContext } from 'src/views/Root';
+import { StudentsContext } from 'src/providers/StudentsProvider';
 import { ViewWrapper } from 'src/components/molecules/ViewWrapper/ViewWrapper';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { FormField } from 'src/components/molecules/FormField/FormField';

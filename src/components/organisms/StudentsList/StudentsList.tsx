@@ -1,8 +1,8 @@
+import { useContext } from 'react';
+import { StudentsContext } from 'src/providers/StudentsProvider';
 import { StudentsListItem } from 'src/components/molecules/StudentsListItem/SutdentsListItem';
 import { StyledList } from './StudentsList.styles';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
-import { StudentsContext } from 'src/views/Root';
-import { useContext } from 'react';
 
 export const StudentsList = () => {
 	const { students } = useContext(StudentsContext);
