@@ -1,8 +1,8 @@
+import { useContext } from 'react';
+import { StudentType, StudentsContext } from 'src/views/Root';
 import { StyledInfo } from 'src/components/atoms/StyledInfo/StyledInfo';
 import { DeleteButton } from 'src/components/atoms/DeleteButton/DeleteButton';
 import { StyledAverage, StyledListItem } from './StudentsListItem.styles';
-import { StudentType, StudentsContext } from 'src/views/Root';
-import { useContext } from 'react';
 
 type StudentsListItemProps = {
 	studentData: StudentType;

@@ -47,22 +47,22 @@ export const Root = () => {
 	return (
 		<Router>
 			<ThemeProvider theme={theme}>
-				<StudentsContext.Provider
-					value={{
-						students,
-						handleDeleteStudent,
-						handleAddStudent,
-					}}>
-					<GlobalStyle />
-					<MainTemplate>
+				<GlobalStyle />
+				<MainTemplate>
+					<StudentsContext.Provider
+						value={{
+							students,
+							handleDeleteStudent,
+							handleAddStudent,
+						}}>
 						<Wrapper>
 							<Routes>
 								<Route path='/' element={<Dashboard />} />
 								<Route path='/add-student' element={<AddStudent />} />
 							</Routes>
 						</Wrapper>
-					</MainTemplate>
-				</StudentsContext.Provider>
+					</StudentsContext.Provider>
+				</MainTemplate>
 			</ThemeProvider>
 		</Router>
 	);
