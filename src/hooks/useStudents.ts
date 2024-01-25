@@ -21,14 +21,28 @@ export const useStudents = (groupId?: string) => {
 	}, []);
 
 	useEffect(() => {
+		if (!groupId) return;
 		axios
 			.get(`/students/${groupId}`)
 			.then(({ data }) => setStudents(data.students))
 			.catch(err => console.log(err));
 	}, [groupId]);
 
+	const findStudents = async (searchPhrase: string) => {
+		if (!searchPhrase) return [];
+		try {
+			const { data } = await axios.post('/students/search', {
+				searchPhrase,
+			});
+			return data.students;
+		} catch (error) {
+			console.log(error);
+		}
+	};
+
 	return {
 		groups,
 		students,
+		findStudents,
 	};
 };

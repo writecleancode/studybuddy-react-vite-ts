@@ -21,4 +21,14 @@ export const handlers = [
 			students: matchingStudents,
 		});
 	}),
+
+	http.post('/students/search', async ({ request }) => {
+		const { searchPhrase } = (await request.json()) as { searchPhrase: string };
+		const matchingStudents = searchPhrase
+			? students.filter(student => student.name.toLowerCase().includes(searchPhrase.toLowerCase()))
+			: [];
+		return HttpResponse.json({
+			students: matchingStudents,
+		});
+	}),
 ];
