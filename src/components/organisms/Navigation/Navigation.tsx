@@ -6,8 +6,7 @@ export const Navigation = () => {
 			<Logo>
 				<p>Study Buddy</p>
 			</Logo>
-            <StyledLink to='/'>Dashboard</StyledLink>
-            <StyledLink to='/add-student'>Add student</StyledLink>
+			<StyledLink to='/group'>Dashboard</StyledLink>
 		</Wrapper>
 	);
 };
