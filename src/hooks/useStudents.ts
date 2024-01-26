@@ -1,32 +1,25 @@
-import { useEffect, useState } from 'react';
+import { useCallback } from 'react';
 import axios from 'axios';
 
-type StudentType = {
-	id: string;
-	name: string;
-	attendance: string;
-	average: string;
-	group: string;
-};
-
-export const useStudents = (groupId?: string) => {
-	const [groups, setGroups] = useState<never[] | string[]>([]);
-	const [students, setStudents] = useState<never[] | StudentType[]>([]);
-
-	useEffect(() => {
-		axios
-			.get('/groups')
-			.then(({ data }) => setGroups(data.groups))
-			.catch(err => console.log(err));
+export const useStudents = () => {
+	const getGroups = useCallback(async () => {
+		try {
+			const { data } = await axios.get('/groups');
+			return data.groups;
+		} catch (error) {
+			console.log(error);
+		}
 	}, []);
 
-	useEffect(() => {
-		if (!groupId) return;
-		axios
-			.get(`/students/${groupId}`)
-			.then(({ data }) => setStudents(data.students))
-			.catch(err => console.log(err));
-	}, [groupId]);
+	const getStudentsByGroup = useCallback(async (groupId?: string) => {
+		if (!groupId) return [];
+		try {
+			const { data } = await axios.get(`/students/${groupId}`);
+			return data.students;
+		} catch (error) {
+			console.log(error);
+		}
+	}, []);
 
 	const findStudents = async (searchPhrase: string) => {
 		if (!searchPhrase) return [];
@@ -41,8 +34,8 @@ export const useStudents = (groupId?: string) => {
 	};
 
 	return {
-		groups,
-		students,
+		getGroups,
+		getStudentsByGroup,
 		findStudents,
 	};
 };

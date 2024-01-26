@@ -27,7 +27,6 @@ export const SearchBar = () => {
 	500;
 
 	useEffect(() => {
-		if (!inputValue) return;
 		getMatchingStudents();
 	}, [inputValue]);
 
