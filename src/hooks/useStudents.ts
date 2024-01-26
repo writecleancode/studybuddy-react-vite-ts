@@ -21,7 +21,7 @@ export const useStudents = () => {
 		}
 	}, []);
 
-	const findStudents = async (searchPhrase: string) => {
+	const findStudents = async (searchPhrase?: string) => {
 		if (!searchPhrase) return [];
 		try {
 			const { data } = await axios.post('/students/search', {

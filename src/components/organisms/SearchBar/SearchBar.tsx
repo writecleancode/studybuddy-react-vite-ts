@@ -1,5 +1,6 @@
-import { FormEvent, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useStudents } from 'src/hooks/useStudents';
+import { useCombobox } from 'downshift';
 import { Input } from 'src/components/atoms/Input/StyledInput';
 import { SearchBarWrapper, SearchResults, SearchWrapper, StatusInfo } from './SearchBar.styles';
 
@@ -12,23 +13,19 @@ type StudentType = {
 };
 
 export const SearchBar = () => {
-	const [inputValue, setInputValue] = useState('');
 	const [matchingStudents, setMatchingStudents] = useState<never[] | StudentType[]>([]);
 	const { findStudents } = useStudents();
 
-	const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-		setInputValue(e.currentTarget.value);
-	};
-
-	const getMatchingStudents = async () => {
+	const getMatchingStudents = async ({ inputValue }: { inputValue?: string }) => {
 		const students = await findStudents(inputValue);
 		setMatchingStudents(students);
 	};
 	500;
 
-	useEffect(() => {
-		getMatchingStudents();
-	}, [inputValue]);
+	const { isOpen, getMenuProps, getInputProps, getItemProps } = useCombobox({
+		items: matchingStudents,
+		onInputValueChange: getMatchingStudents,
+	});
 
 	return (
 		<SearchBarWrapper>
@@ -37,14 +34,20 @@ export const SearchBar = () => {
 				<h6>Teacher</h6>
 			</StatusInfo>
 			<SearchWrapper>
-				<Input name='search' id='search' placeholder='find student' value={inputValue} onChange={handleInputChange} />
-				{matchingStudents.length ? (
-					<SearchResults>
-						{matchingStudents.map(student => (
-							<li key={student.id}>{student.name}</li>
+				<Input name='search' placeholder='find student' {...getInputProps()} />
+				<SearchResults {...getMenuProps()}>
+					{isOpen &&
+						matchingStudents.map((student, index) => (
+							<li
+								key={student.id}
+								{...getItemProps({
+									item: student,
+									index,
+								})}>
+								{student.name}
+							</li>
 						))}
-					</SearchResults>
-				) : null}
+				</SearchResults>
 			</SearchWrapper>
 		</SearchBarWrapper>
 	);
