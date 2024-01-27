@@ -39,7 +39,7 @@ export const SearchWrapper = styled.div`
 	max-width: 550px;
 `;
 
-export const SearchResults = styled.ul`
+export const SearchResults = styled.ul<{ $isVisible: boolean }>`
 	position: absolute;
 	top: 38px;
 	left: 0;
@@ -54,22 +54,22 @@ export const SearchResults = styled.ul`
 	background-color: ${({ theme }) => theme.colors.white};
 	box-shadow: -2px 4px 10px rgba(115, 124, 142, 0.2);
 	list-style: none;
+	visibility: ${({ $isVisible }) => ($isVisible ? 'visible' : 'hidden')};
 	overflow-y: scroll;
+`;
 
-	li {
-		padding: 20px 8px;
-		width: 100%;
-		background-color: ${({ theme }) => theme.colors.white};
-		color: ${({ theme }) => theme.colors.darkGrey};
-		font-weight: bold;
-	}
+export const SearchResultsItem = styled.li<{ $isHighlighted: boolean }>`
+	padding: 20px 8px;
+	width: 100%;
+	background-color: ${({ theme, $isHighlighted }) => ($isHighlighted ? theme.colors.lightPurple : theme.colors.white)};
+	color: ${({ theme }) => theme.colors.darkGrey};
+	font-weight: bold;
 
-	li:hover,
-	li:focus {
+	&:hover {
 		background-color: ${({ theme }) => theme.colors.lightPurple};
 	}
 
-	li:not(:last-child) {
+	&:not(:last-child) {
 		border-bottom: 1px solid ${({ theme }) => theme.colors.grey};
 	}
 `;

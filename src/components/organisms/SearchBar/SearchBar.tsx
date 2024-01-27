@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useStudents } from 'src/hooks/useStudents';
 import { useCombobox } from 'downshift';
 import { Input } from 'src/components/atoms/Input/StyledInput';
-import { SearchBarWrapper, SearchResults, SearchWrapper, StatusInfo } from './SearchBar.styles';
+import { SearchBarWrapper, SearchResults, SearchResultsItem, SearchWrapper, StatusInfo } from './SearchBar.styles';
 
 type StudentType = {
 	id: string;
@@ -22,7 +22,7 @@ export const SearchBar = () => {
 	};
 	500;
 
-	const { isOpen, getMenuProps, getInputProps, getItemProps } = useCombobox({
+	const { isOpen, getMenuProps, getInputProps, highlightedIndex, getItemProps } = useCombobox({
 		items: matchingStudents,
 		onInputValueChange: getMatchingStudents,
 	});
@@ -35,17 +35,15 @@ export const SearchBar = () => {
 			</StatusInfo>
 			<SearchWrapper>
 				<Input name='search' placeholder='find student' {...getInputProps()} />
-				<SearchResults {...getMenuProps()}>
+				<SearchResults $isVisible={isOpen && matchingStudents.length > 0} {...getMenuProps()}>
 					{isOpen &&
 						matchingStudents.map((student, index) => (
-							<li
+							<SearchResultsItem
 								key={student.id}
-								{...getItemProps({
-									item: student,
-									index,
-								})}>
+								$isHighlighted={highlightedIndex === index}
+								{...getItemProps({ item: student, index })}>
 								{student.name}
-							</li>
+							</SearchResultsItem>
 						))}
 				</SearchResults>
 			</SearchWrapper>
