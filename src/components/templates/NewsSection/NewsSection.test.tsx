@@ -1,5 +1,4 @@
-import { renderWithProviders } from 'src/helpers/renderWithProviders';
-import { screen } from '@testing-library/react';
+import { render, screen } from 'src/test-utils';
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import { NewsSection, query } from './NewsSection';
@@ -16,7 +15,7 @@ describe('News Section', () => {
 			})
 			.reply(500);
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 		await screen.findByText('Sorry, we could not load the articles...');
 	});
 
@@ -33,7 +32,7 @@ describe('News Section', () => {
 				},
 			});
 
-		renderWithProviders(<NewsSection />);
+		render(<NewsSection />);
 		await screen.findByText('Test title');
 	});
 });

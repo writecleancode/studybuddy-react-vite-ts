@@ -1,10 +1,9 @@
-import { renderWithProviders } from 'src/helpers/renderWithProviders';
-import { screen } from '@testing-library/react';
+import { render, screen } from 'src/test-utils';
 import { FormField } from './FormField';
 
 describe('Form Field', () => {
 	it('Renders the component', () => {
-		renderWithProviders(<FormField label='Test' name='test' id='test' />);
+		render(<FormField label='Test' name='test' id='test' />);
 		screen.getByLabelText('Test');
 	});
 });
