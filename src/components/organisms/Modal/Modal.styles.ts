@@ -9,7 +9,7 @@ export const ModalWrapper = styled.div`
 	flex-direction: column;
 	justify-content: space-between;
 	align-items: center;
-	padding: 48px;
+	padding: 16px;
 	border-radius: 15px;
 	min-width: 600px;
 	min-height: 700px;

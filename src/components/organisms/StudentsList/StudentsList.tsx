@@ -15,6 +15,8 @@ export type StudentType = {
 	attendance: string;
 	average: string;
 	group: string;
+	course: string;
+	grades: { subject: string; average: string }[];
 };
 
 export const StudentsList = ({ handleOpenStudentDetails }: StudentsListProps) => {
