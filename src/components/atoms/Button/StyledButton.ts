@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const Button = styled.button<{ $isBig: boolean }>`
+export const Button = styled.button<{ $isBig?: boolean }>`
 	margin: 8px 0;
 	padding: ${({ $isBig }) => ($isBig ? '8px 32px' : '8px 16px')};
 	border: none;

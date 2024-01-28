@@ -5,7 +5,11 @@ import { StudentsListItem } from 'src/components/molecules/StudentsListItem/Sutd
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { StyledList } from './StudentsList.styles';
 
-type StudentType = {
+type StudentsListProps = {
+	handleOpenStudentDetails: (id: string) => void;
+};
+
+export type StudentType = {
 	id: string;
 	name: string;
 	attendance: string;
@@ -13,7 +17,7 @@ type StudentType = {
 	group: string;
 };
 
-export const StudentsList = () => {
+export const StudentsList = ({ handleOpenStudentDetails }: StudentsListProps) => {
 	const [students, setStudents] = useState<never[] | StudentType[]>([]);
 	const { id } = useParams();
 	const { getStudentsByGroup } = useStudents();
@@ -30,7 +34,11 @@ export const StudentsList = () => {
 			<StyledTitle>Students list</StyledTitle>
 			<StyledList>
 				{students.map(studentData => (
-					<StudentsListItem key={studentData.id} studentData={studentData} />
+					<StudentsListItem
+						key={studentData.id}
+						studentData={studentData}
+						onClick={() => handleOpenStudentDetails(studentData.id)}
+					/>
 				))}
 			</StyledList>
 		</>
