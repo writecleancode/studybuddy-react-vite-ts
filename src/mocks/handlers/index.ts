@@ -9,35 +9,16 @@ export const handlers = [
 		});
 	}),
 
-	http.get('/groups/:id', ({ params }) => {
-		if (params.id === 'undefined') {
+	http.get('/students/:group', ({ params }) => {
+		if (params.group === 'undefined') {
 			return HttpResponse.json({
 				students,
 			});
 		}
 
-		const matchingStudents = students.filter(student => student.group === params.id);
+		const matchingStudents = students.filter(student => student.group === params.group);
 		return HttpResponse.json({
 			students: matchingStudents,
-		});
-	}),
-
-	http.get('/students/:id', ({ params }) => {
-		if (params.id === 'undefined') {
-			return HttpResponse.json({
-				student: {},
-			});
-		}
-
-		const matchingStudent = students.find(student => student.id === params.id);
-		if (!matchingStudent) {
-			return new HttpResponse('No matching student', {
-				status: 404,
-			});
-		}
-
-		return HttpResponse.json({
-			student: matchingStudent,
 		});
 	}),
 

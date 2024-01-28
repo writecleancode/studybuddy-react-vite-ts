@@ -1,6 +1,5 @@
 import { StyledInfo } from 'src/components/atoms/StyledInfo/StyledInfo';
-import { StyledAverage } from 'src/components/atoms/StyledAverage/StyledAverage.styles';
-import { StyledListItem } from './StudentsListItem.styles';
+import { StyledAverage, StyledListItem } from './StudentsListItem.styles';
 
 type StudentsListItemProps = {
 	studentData: {
@@ -8,12 +7,11 @@ type StudentsListItemProps = {
 		attendance: string;
 		average: string;
 	};
-	onClick: () => void;
 };
 
-export const StudentsListItem = ({ studentData: { name, attendance, average }, ...props }: StudentsListItemProps) => {
+export const StudentsListItem = ({ studentData: { name, attendance, average } }: StudentsListItemProps) => {
 	return (
-		<StyledListItem {...props}>
+		<StyledListItem>
 			<StyledAverage $average={Number(average)}>{average}</StyledAverage>
 			<StyledInfo name={name} attendance={attendance} />
 		</StyledListItem>
