@@ -38,7 +38,10 @@ export const SearchBar = () => {
 			</StatusInfo>
 			<SearchWrapper>
 				<Input name='search' placeholder='find student' {...getInputProps()} />
-				<SearchResults aria-label='search results' $isVisible={isOpen && matchingStudents.length > 0} {...getMenuProps()}>
+				<SearchResults
+					aria-label='search results'
+					$isVisible={isOpen && matchingStudents.length > 0}
+					{...getMenuProps()}>
 					{isOpen &&
 						matchingStudents.map((student, index) => (
 							<SearchResultsItem
