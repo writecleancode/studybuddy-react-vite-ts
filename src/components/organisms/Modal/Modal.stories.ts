@@ -6,20 +6,17 @@ const meta = {
 	parameters: {
 		layout: 'centered',
 	},
+	args: {
+		currentStudent: {
+			id: '1',
+			name: 'Adam Romański',
+			attendance: '39%',
+			average: '2.3',
+			group: 'A',
+		},
+	},
 };
 
 export default meta;
 
-const mockStudent = {
-	id: '1',
-	name: 'Adam Romański',
-	attendance: '39%',
-	average: '2.3',
-	group: 'A',
-};
-
-export const Default = {
-	args: {
-		currentStudent: mockStudent,
-	},
-};
+export const Default = {};
