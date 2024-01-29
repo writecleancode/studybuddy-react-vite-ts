@@ -27,7 +27,7 @@ export const Dashboard = () => {
 					{groups.length
 						? groups.map(group => (
 								<Link to={`/group/${group}`} key={group}>
-									{group}{' '}
+									{group}
 								</Link>
 						  ))
 						: null}
