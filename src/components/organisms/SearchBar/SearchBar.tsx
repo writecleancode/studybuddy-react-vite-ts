@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { useStudents } from 'src/hooks/useStudents';
 import { useCombobox } from 'downshift';
+import { debounce } from 'lodash';
 import { Input } from 'src/components/atoms/Input/StyledInput';
 import { SearchBarWrapper, SearchResults, SearchResultsItem, SearchWrapper, StatusInfo } from './SearchBar.styles';
 
@@ -16,11 +17,13 @@ export const SearchBar = () => {
 	const [matchingStudents, setMatchingStudents] = useState<never[] | StudentType[]>([]);
 	const { findStudents } = useStudents();
 
-	const getMatchingStudents = async ({ inputValue }: { inputValue?: string }) => {
-		const students = await findStudents(inputValue);
-		setMatchingStudents(students);
-	};
-	500;
+	const getMatchingStudents = useCallback(
+		debounce(async ({ inputValue }: { inputValue?: string }) => {
+			const students = await findStudents(inputValue);
+			setMatchingStudents(students);
+		}, 500),
+		[]
+	);
 
 	const { isOpen, getMenuProps, getInputProps, highlightedIndex, getItemProps } = useCombobox({
 		items: matchingStudents,
