@@ -8,16 +8,15 @@ type FormFieldProps = {
 	name: string;
 	id: string;
 	type?: string;
-	checked?: boolean;
 	value?: string;
 	onChange?: (e: FormEvent<HTMLInputElement>) => void;
 };
 
-export const FormField = ({ label, name, id, type = 'text', checked, value, onChange }: FormFieldProps) => {
+export const FormField = ({ label, name, id, type = 'text', value, onChange }: FormFieldProps) => {
 	return (
 		<Wrapper>
 			<Label htmlFor={id}>{label}</Label>
-			<Input name={name} id={id} type={type} value={value} onChange={onChange} checked={checked} />
+			<Input name={name} id={id} type={type} value={value} onChange={onChange} />
 		</Wrapper>
 	);
 };
