@@ -3,17 +3,17 @@ import { StudentType } from 'src/components/organisms/StudentsList/StudentsList'
 import { StyledAverage } from 'src/components/atoms/StyledAverage/StyledAverage.styles';
 
 type StudentDetailsProps = {
-	currentStudent: StudentType | Record<string, never>;
+	student: StudentType | Record<string, never>;
 };
 
-export const StudentDetails = ({ currentStudent }: StudentDetailsProps) => {
+export const StudentDetails = ({ student }: StudentDetailsProps) => {
 	return (
 		<div>
 			<StyledTitle>
-				{currentStudent.name} | Group {currentStudent.group}
+				{student.name} | Group {student.group}
 			</StyledTitle>
-			<p>Attendance: {currentStudent.attendance}</p>
-			<StyledAverage $average={Number(currentStudent.average)}>{currentStudent.average}</StyledAverage>
+			<p>Attendance: {student.attendance}</p>
+			<StyledAverage $average={Number(student.average)}>{student.average}</StyledAverage>
 		</div>
 	);
 };

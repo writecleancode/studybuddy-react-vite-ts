@@ -6,6 +6,7 @@ import { Modal } from 'src/components/organisms/Modal/Modal';
 import { StudentType, StudentsList } from 'src/components/organisms/StudentsList/StudentsList';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { GroupWrapper, TitleWrapper, Wrapper } from './Dashboard.styles';
+import { StudentDetails } from 'src/components/molecules/StudentDetails';
 
 export const Dashboard = () => {
 	const [groups, setGroups] = useState([]);
@@ -45,7 +46,11 @@ export const Dashboard = () => {
 			</TitleWrapper>
 			<GroupWrapper>
 				<StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
-				{isModalOpen ? <Modal currentStudent={currentStudent} handleCloseModal={handleCloseModal} /> : null}
+				{isModalOpen ? (
+					<Modal handleCloseModal={handleCloseModal}>
+						<StudentDetails student={currentStudent} />
+					</Modal>
+				) : null}
 			</GroupWrapper>
 		</Wrapper>
 	);
