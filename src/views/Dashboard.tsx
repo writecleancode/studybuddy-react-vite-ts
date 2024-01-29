@@ -6,6 +6,7 @@ import { Modal } from 'src/components/organisms/Modal/Modal';
 import { StudentType, StudentsList } from 'src/components/organisms/StudentsList/StudentsList';
 import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { GroupWrapper, TitleWrapper, Wrapper } from './Dashboard.styles';
+import { StudentDetails } from 'src/components/molecules/StudentDetails/StudentDetails';
 
 const mockStudent = {
 	id: '1',
@@ -68,7 +69,9 @@ export const Dashboard = () => {
 			</TitleWrapper>
 			<GroupWrapper>
 				<StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
-				{isModalOpen ? <Modal student={mockStudent} handleCloseModal={handleCloseModal} /> : null}
+				<Modal isOpen={isModalOpen} handleCloseModal={handleCloseModal}>
+					<StudentDetails student={mockStudent} />
+				</Modal>
 			</GroupWrapper>
 		</Wrapper>
 	);
