@@ -1,5 +1,7 @@
+import { useCallback } from 'react';
 import { FormEvent, useEffect, useState } from 'react';
 import { useStudents } from 'src/hooks/useStudents';
+import { debounce } from 'lodash';
 import { Input } from 'src/components/atoms/Input/StyledInput';
 import { SearchBarWrapper, SearchResults, SearchWrapper, StatusInfo } from './SearchBar.styles';
 
@@ -20,14 +22,16 @@ export const SearchBar = () => {
 		setInputValue(e.currentTarget.value);
 	};
 
-	const getMatchingStudents = async () => {
-		const students = await findStudents(inputValue);
-		setMatchingStudents(students);
-	};
-	500;
+	const getMatchingStudents = useCallback(
+		debounce(async (inputValue: string) => {
+			const students = await findStudents(inputValue);
+			setMatchingStudents(students);
+		}, 500),
+		[]
+	);
 
 	useEffect(() => {
-		getMatchingStudents();
+		getMatchingStudents(inputValue);
 	}, [inputValue]);
 
 	return (
