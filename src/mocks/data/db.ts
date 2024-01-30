@@ -1,7 +1,7 @@
 import { factory, primaryKey } from '@mswjs/data';
 import { faker } from '@faker-js/faker';
 
-faker.seed(6)
+faker.seed(6);
 
 const groups = ['A', 'B', 'C'];
 const getRandomAverage = () => faker.number.float({ min: 2, max: 5, multipleOf: 0.1 });
@@ -32,5 +32,9 @@ export const db = factory({
 					average: getRandomAverage(),
 				},
 			] as any,
+	},
+
+	group: {
+		id: primaryKey(String),
 	},
 });

@@ -1,18 +1,20 @@
 import { HttpResponse, http } from 'msw';
-import { groups } from 'src/mocks/data/groups';
 import { db } from '../data/db';
 
 export const handlers = [
 	http.get('/groups', () => {
+		const groups = db.group.getAll();
+		const groupNames = groups.map(group => group.id);
 		return HttpResponse.json({
-			groups,
+			groups: groupNames,
 		});
 	}),
 
 	http.get('/groups/:id', ({ params }) => {
 		if (params.id === 'undefined') {
-			return HttpResponse.json({
-				students: db.student.getAll(),
+			return new HttpResponse(null, {
+				status: 404,
+				statusText: 'Please provide the group ID',
 			});
 		}
 
