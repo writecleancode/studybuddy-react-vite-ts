@@ -17,7 +17,6 @@ export const Dashboard = () => {
 
 	const handleOpenStudentDetails = async (studentId: string) => {
 		const matchingStudent = await getStudentById(studentId);
-		console.log(matchingStudent);
 		setCurrentStudent(matchingStudent);
 		handleOpenModal();
 	};

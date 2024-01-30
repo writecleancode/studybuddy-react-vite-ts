@@ -1,5 +1,5 @@
 import { HttpResponse, http } from 'msw';
-import { db } from '../data/db';
+import { db } from '../db';
 
 export const handlers = [
 	http.get('/groups', () => {
