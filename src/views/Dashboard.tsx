@@ -8,29 +8,6 @@ import { StyledTitle } from 'src/components/atoms/StyledTitle/StyledTitle';
 import { GroupWrapper, TitleWrapper, Wrapper } from './Dashboard.styles';
 import { StudentDetails } from 'src/components/molecules/StudentDetails/StudentDetails';
 
-const mockStudent = {
-	id: '1',
-	name: 'Adam Romański',
-	attendance: '39%',
-	average: '2.3',
-	group: 'A',
-	course: 'Business Philosophy',
-	grades: [
-		{
-			subject: 'Business Philosophy',
-			average: '3.3',
-		},
-		{
-			subject: 'Marketing',
-			average: '4.7',
-		},
-		{
-			subject: 'Modern Economy',
-			average: '2.5',
-		},
-	],
-};
-
 export const Dashboard = () => {
 	const [groups, setGroups] = useState([]);
 	const [currentStudent, setCurrentStudent] = useState<Record<string, never> | StudentType>({});
@@ -40,6 +17,7 @@ export const Dashboard = () => {
 
 	const handleOpenStudentDetails = async (studentId: string) => {
 		const matchingStudent = await getStudentById(studentId);
+		console.log(matchingStudent);
 		setCurrentStudent(matchingStudent);
 		handleOpenModal();
 	};
@@ -70,7 +48,7 @@ export const Dashboard = () => {
 			<GroupWrapper>
 				<StudentsList handleOpenStudentDetails={handleOpenStudentDetails} />
 				<Modal isOpen={isModalOpen} handleCloseModal={handleCloseModal}>
-					<StudentDetails student={mockStudent} />
+					<StudentDetails student={currentStudent} />
 				</Modal>
 			</GroupWrapper>
 		</Wrapper>
