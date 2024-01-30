@@ -1,6 +1,6 @@
 import { setupWorker } from 'msw/browser';
 import { handlers } from './handlers';
-import { db } from './handlers/db';
+import { db } from './db';
 
 export const worker = setupWorker(...handlers);
 

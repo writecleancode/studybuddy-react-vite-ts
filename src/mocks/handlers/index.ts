@@ -1,6 +1,6 @@
 import { HttpResponse, http } from 'msw';
 import { groups } from 'src/mocks/data/groups';
-import { db } from './db';
+import { db } from '../db';
 
 export const handlers = [
 	http.get('/groups', () => {
