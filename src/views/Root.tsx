@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import axios from 'axios';
 import { ThemeProvider } from 'styled-components';
 import { theme } from 'src/assets/styles/theme';
@@ -23,15 +23,19 @@ type handleSignInTypes = {
 
 type UnauthenticatedAppProps = {
 	handleSignIn: ({ login, password }: handleSignInTypes) => Promise<void>;
+	loginError: string;
 };
 
-export const UnauthenticatedApp = ({ handleSignIn }: UnauthenticatedAppProps) => {
-	const { register, handleSubmit } = useForm<Inputs>();
-	const onSubmit: SubmitHandler<Inputs> = data => handleSignIn(data);
+export const UnauthenticatedApp = ({ handleSignIn, loginError }: UnauthenticatedAppProps) => {
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm<Inputs>();
 
 	return (
 		<form
-			onSubmit={handleSubmit(onSubmit)}
+			onSubmit={handleSubmit(handleSignIn)}
 			style={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -39,15 +43,18 @@ export const UnauthenticatedApp = ({ handleSignIn }: UnauthenticatedAppProps) =>
 				alignItems: 'center',
 				height: '100vh',
 			}}>
-			<FormField label='Login' id='login' autoComplete='username' {...register('login')} />
+			<FormField label='Login' id='login' autoComplete='username' {...register('login', { required: true })} />
+			{errors.login ? <span>Login is required</span> : null}
 			<FormField
 				label='Password'
 				id='password'
 				type='password'
 				autoComplete='current-password'
-				{...register('password')}
+				{...register('password', { required: true })}
 			/>
+			{errors.password ? <span>Password is required</span> : null}
 			<Button type='submit'>Sign in</Button>
+			{loginError ? <p>{loginError}</p> : null}
 		</form>
 	);
 };
@@ -69,6 +76,7 @@ export const AuthenticatedApp = () => {
 
 export const Root = () => {
 	const [user, setUser] = useState(false);
+	const [error, setError] = useState('');
 
 	useEffect(() => {
 		const token = localStorage.getItem('token');
@@ -96,6 +104,7 @@ export const Root = () => {
 			localStorage.setItem('token', response.data.token);
 		} catch (error) {
 			console.log(error);
+			setError('Please provide valid user data');
 		}
 	};
 
@@ -103,7 +112,7 @@ export const Root = () => {
 		<Router>
 			<ThemeProvider theme={theme}>
 				<GlobalStyle />
-				{user ? <AuthenticatedApp /> : <UnauthenticatedApp handleSignIn={handleSignIn} />}
+				{user ? <AuthenticatedApp /> : <UnauthenticatedApp handleSignIn={handleSignIn} loginError={error} />}
 			</ThemeProvider>
 		</Router>
 	);
