@@ -1,5 +1,6 @@
 import { HttpResponse, http } from 'msw';
 import { db } from '../db';
+import { authenticateRequest } from '../helpers';
 
 const sanitizeUser = (user: Record<string, any>) => {
 	const { password, ...rest } = user;
@@ -26,6 +27,17 @@ export const auth = [
 		return new HttpResponse(null, {
 			status: 403,
 			statusText: 'Invalid user data',
+		});
+	}),
+
+	http.get('/me', ({ request }) => {
+		if (authenticateRequest(request)) {
+			const user = db.teacher.getAll()[0];
+			return HttpResponse.json({ ...sanitizeUser(user) });
+		}
+
+		return new HttpResponse(null, {
+			status: 403,
 		});
 	}),
 ];

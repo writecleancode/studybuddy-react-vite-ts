@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import axios from 'axios';
@@ -70,11 +70,30 @@ export const AuthenticatedApp = () => {
 export const Root = () => {
 	const [user, setUser] = useState(false);
 
+	useEffect(() => {
+		const token = localStorage.getItem('token');
+
+		if (token) {
+			(async () => {
+				try {
+					const response = await axios.get('/me', {
+						headers: {
+							Authorization: `Bearer ${token}`,
+						},
+					});
+					setUser(response.data);
+				} catch (error) {
+					console.log(error);
+				}
+			})();
+		}
+	}, []);
+
 	const handleSignIn = async ({ login, password }: handleSignInTypes) => {
 		try {
-			const reponse = await axios.post('/login', { login, password });
-			setUser(reponse.data);
-			localStorage.setItem('token', reponse.data.token);
+			const response = await axios.post('/login', { login, password });
+			setUser(response.data);
+			localStorage.setItem('token', response.data.token);
 		} catch (error) {
 			console.log(error);
 		}
