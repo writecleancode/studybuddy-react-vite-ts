@@ -7,6 +7,7 @@ export const theme = {
 		black: '#111111',
 		success: '#8FCB81',
 		error: '#CB8581',
+		lightError: '#FF8383',
 		warning: '#E1D888',
 		lightPurple: '#ECEFF7',
 	},

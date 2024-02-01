@@ -8,7 +8,8 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        font-family: 'Montserrat', sans-serif;   
+        font-family: 'Montserrat', sans-serif;
+        overflow: hidden;
     }
 
     a, button {
