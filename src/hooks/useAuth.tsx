@@ -1,4 +1,5 @@
 import { ReactNode, createContext, useContext, useEffect, useState } from 'react';
+import { useError } from './useError';
 import axios from 'axios';
 
 type AuthProviderProps = {
@@ -24,6 +25,7 @@ export const AuthContext = createContext<AuthContextType>({
 
 export const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState(null);
+	const { dispatchError } = useError();
 
 	const handleSignIn = async ({ login, password }: authDataType) => {
 		try {
@@ -31,6 +33,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
 			setUser(response.data);
 			localStorage.setItem('token', response.data.token);
 		} catch (error) {
+			dispatchError('Invalid login or password');
 			console.log(error);
 		}
 	};
@@ -75,7 +78,7 @@ export const useAuth = () => {
 	const auth = useContext(AuthContext);
 
 	if (!auth) {
-		throw Error('useAuth needs to be used inside AuthContext');
+		throw Error('useAuth needs to be used inside AuthProvider');
 	}
 
 	return auth;

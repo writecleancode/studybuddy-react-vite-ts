@@ -14,6 +14,6 @@ export const Default = {};
 
 export const WrongLoginOrPassword = {
 	args: {
-		errorMessage: 'Wrong login or password',
+		message: 'Wrong login or password',
 	},
 };

@@ -11,7 +11,7 @@ export const Navigation = () => {
 			</Logo>
 			<StyledLink to='/group'>Dashboard</StyledLink>
 			<StyledLink to='/' onClick={handleSignOut}>
-				Log out
+				Logout
 			</StyledLink>
 		</Wrapper>
 	);
