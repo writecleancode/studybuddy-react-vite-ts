@@ -1,5 +1,6 @@
 import { ReactElement, ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { ThemeProvider } from 'styled-components';
 import { theme } from './assets/styles/theme';
 
