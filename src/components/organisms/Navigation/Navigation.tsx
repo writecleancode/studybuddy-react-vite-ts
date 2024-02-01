@@ -8,7 +8,7 @@ export const Navigation = () => {
 			</Logo>
 			<StyledLink to='/group'>Dashboard</StyledLink>
 			<StyledLink to='/' onClick={() => localStorage.removeItem('token')}>
-				Log out
+				Logout
 			</StyledLink>
 		</Wrapper>
 	);
