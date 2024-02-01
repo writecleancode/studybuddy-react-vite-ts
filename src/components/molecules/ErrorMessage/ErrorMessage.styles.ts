@@ -31,9 +31,11 @@ export const Wrapper = styled.div`
 	background-color: ${({ theme }) => theme.colors.white};
 	color: ${({ theme }) => theme.colors.lightError};
 	animation: ${slideAnimation} 1s ease-in-out 1 forwards, ${slideAnimation} 1s 6s ease-in-out 1 reverse forwards;
+
 	${StyledTitle} {
 		color: ${({ theme }) => theme.colors.lightError};
 	}
+
 	&::before,
 	&::after {
 		content: '';
@@ -46,9 +48,11 @@ export const Wrapper = styled.div`
 		width: 60px;
 		height: 5px;
 	}
+
 	&::before {
 		opacity: 0.5;
 	}
+
 	&::after {
 		transform: scaleX(1);
 		transform-origin: left top;
