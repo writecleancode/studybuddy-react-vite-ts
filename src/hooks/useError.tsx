@@ -33,7 +33,7 @@ export const ErrorProvider = ({ children }: ErrorProviderProps) => {
 export const useError = () => {
 	const errorContext = useContext(ErrorContext);
 
-	if (!errorContext) {
+	if (!Object.keys(errorContext).length) {
 		throw Error('errorContext needs to be used inside ErrorProvider');
 	}
 
