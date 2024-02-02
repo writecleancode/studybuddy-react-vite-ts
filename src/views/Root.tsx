@@ -4,6 +4,7 @@ import { useError } from 'src/hooks/useError';
 import { useForm } from 'react-hook-form';
 import { MainTemplate } from 'src/components/templates/MainTemplate/MainTemplate';
 import { Dashboard } from './Dashboard';
+import { Notes } from './Notes';
 import { FormField } from 'src/components/molecules/FormField/FormField';
 import { Button } from 'src/components/atoms/Button/StyledButton';
 import { ErrorMessage } from 'src/components/molecules/ErrorMessage/ErrorMessage';
@@ -56,6 +57,7 @@ export const AuthenticatedApp = () => {
 					<Route path='/group'>
 						<Route path=':id?' element={<Dashboard />} />
 					</Route>
+					<Route path='/notes' element={<Notes />} />
 				</Routes>
 			</Wrapper>
 		</MainTemplate>
