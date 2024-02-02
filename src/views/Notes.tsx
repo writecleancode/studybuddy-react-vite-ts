@@ -1,28 +1,35 @@
 import { useSelector, useDispatch } from 'react-redux';
 import { addNote } from 'src/store';
+import { useForm } from 'react-hook-form';
 import { Button } from 'src/components/atoms/Button/StyledButton';
 import { Note } from 'src/components/molecules/Note/Note';
 import { FormWrapper, NotesWrapper, StyledFormField, Wrapper } from './Notes.styles';
 
+type Inputs = {
+	title?: string;
+	content?: string;
+};
+
 export const Notes = () => {
 	const notes = useSelector((state: Record<string, []>) => state.notes);
 	const dispatch = useDispatch();
+	const { register, handleSubmit } = useForm<Inputs>();
 
-	const handleAddNote = () => {
+	const handleAddNote = ({ title, content }: Inputs) => {
 		dispatch(
 			addNote({
-				title: `New note ${Math.round(Math.random() * 10)}`,
-				content: 'This is a random note',
+				title,
+				content,
 			})
 		);
 	};
 
 	return (
 		<Wrapper>
-			<FormWrapper>
-				<StyledFormField label='Title' name='title' id='title' />
-				<StyledFormField isTextarea label='Content' name='content' id='content' />
-				<Button onClick={handleAddNote}>Add</Button>
+			<FormWrapper as='form' onSubmit={handleSubmit(handleAddNote)}>
+				<StyledFormField label='Title' id='title' {...register('title')} />
+				<StyledFormField isTextarea label='Content' id='content' {...register('content')} />
+				<Button type='submit'>Add</Button>
 			</FormWrapper>
 			<NotesWrapper>
 				{notes.length ? (

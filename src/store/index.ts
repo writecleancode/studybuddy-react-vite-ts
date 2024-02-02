@@ -22,8 +22,8 @@ const initialState = {
 	notes: [
 		{
 			id: uuid(),
-			title: 'Title ipsum',
-			content: 'Lorem ipsum dolor sit amet',
+			title: 'Title',
+			content: 'This is an example note. You can remove it and add your custom notes',
 		},
 	],
 };

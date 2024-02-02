@@ -18,8 +18,8 @@ export const Note = ({ id, title = 'Untitled', content = 'No content' }: NotePro
 
 	return (
 		<NoteWrapper>
-			<StyledTitle>{title}</StyledTitle>
-			<p>{content}</p>
+			<StyledTitle>{title === '' ? 'Untitled' : title}</StyledTitle>
+			<p>{content === '' ? 'No content' : content}</p>
 			<StyledDeleteButton onClick={handleRemoveNote} />
 		</NoteWrapper>
 	);
