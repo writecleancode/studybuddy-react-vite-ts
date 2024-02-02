@@ -6,8 +6,6 @@ import { FormWrapper, NotesWrapper, StyledFormField, Wrapper } from './Notes.sty
 export const Notes = () => {
 	const notes = useSelector((state: Record<string, []>) => state.notes);
 
-	console.log(notes);
-
 	return (
 		<Wrapper>
 			<FormWrapper>
