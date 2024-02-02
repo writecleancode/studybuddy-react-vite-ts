@@ -14,7 +14,7 @@ export const NotesWidget = () => {
 			<WidgetHandler onClick={handleToggleWidget}>notes</WidgetHandler>
 			<NotesWrapper>
 				{notes.length ? (
-					notes.map(({ id, title, content }) => <Note key={id} title={title} content={content} />)
+					notes.map(({ id, title, content }) => <Note key={id} id={id} title={title} content={content} />)
 				) : (
 					<p>Create your first note</p>
 				)}

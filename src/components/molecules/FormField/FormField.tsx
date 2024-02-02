@@ -11,16 +11,21 @@ type FormFieldProps = {
 	autoComplete?: string;
 	value?: string;
 	onChange?: (e: FormEvent<HTMLInputElement>) => void;
+	isTextarea?: boolean;
 };
 
 type refType = Ref<HTMLInputElement>;
 
 export const FormField = forwardRef(
-	({ label, name, id, type = 'text', autoComplete, value, onChange, ...props }: FormFieldProps, ref: refType) => {
+	(
+		{ label, name, id, type = 'text', autoComplete, value, onChange, isTextarea, ...props }: FormFieldProps,
+		ref: refType
+	) => {
 		return (
 			<Wrapper>
 				<Label htmlFor={id}>{label}</Label>
 				<Input
+					as={isTextarea ? 'textarea' : 'input'}
 					name={name}
 					id={id}
 					type={type}

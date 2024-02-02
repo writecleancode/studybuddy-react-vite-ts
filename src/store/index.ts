@@ -11,6 +11,13 @@ export const addNote = (payload: Record<string, any>) => {
 	};
 };
 
+export const removeNote = (payload: Record<string, any>) => {
+	return {
+		type: 'notes/remove',
+		payload,
+	};
+};
+
 const initialState = {
 	notes: [
 		{
@@ -27,6 +34,12 @@ const notesReducer = (state = initialState, action: Record<string, any>) => {
 			return {
 				...state,
 				notes: [...state.notes, action.payload],
+			};
+
+		case 'notes/remove':
+			return {
+				...state,
+				notes: state.notes.filter(note => note.id !== action.payload.id),
 			};
 
 		default:

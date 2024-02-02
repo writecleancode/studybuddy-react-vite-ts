@@ -7,6 +7,7 @@ export const Input = styled.input`
 	border: 1px solid #c0c7d6;
 	border-radius: 15px;
 	box-shadow: -2px 4px 10px #737c8e17;
+	font-family: sans-serif;
 	resize: none;
 
 	&:focus {

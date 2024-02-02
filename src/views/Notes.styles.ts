@@ -21,11 +21,12 @@ export const FormWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.white};
 `;
 
-export const StyledFormField = styled(FormField)<{ $isTextarea?: boolean }>`
-	border-radius: 25px;
+export const StyledFormField = styled(FormField)<{ isTextarea?: boolean }>`
+	${({ isTextarea }) => (isTextarea ? 'padding: 8px' : null)};
+	border-radius: ${({ isTextarea }) => (isTextarea ? '13px' : '25px')};
 	width: 100%;
 	min-width: 240px;
-	height: ${({ $isTextarea }) => ($isTextarea ? '300px' : 'unset')};
+	height: ${({ isTextarea }) => (isTextarea ? '300px' : 'unset')};
 `;
 
 export const NotesWrapper = styled.div`
