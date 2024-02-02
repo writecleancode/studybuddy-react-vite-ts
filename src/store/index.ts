@@ -1,7 +1,7 @@
 import { createStore } from 'redux';
 import { v4 as uuid } from 'uuid';
 
-export const addNote = payload => {
+export const addNote = (payload: Record<string, any>) => {
 	return {
 		type: 'notes/add',
 		payload: {
@@ -21,7 +21,7 @@ const initialState = {
 	],
 };
 
-const notesReducer = (state = initialState, action) => {
+const notesReducer = (state = initialState, action: Record<string, any>) => {
 	switch (action.type) {
 		case 'notes/add':
 			return {

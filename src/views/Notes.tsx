@@ -4,7 +4,7 @@ import { Note } from 'src/components/molecules/Note/Note';
 import { FormWrapper, NotesWrapper, StyledFormField, Wrapper } from './Notes.styles';
 
 export const Notes = () => {
-	const notes = useSelector(state => state.notes);
+	const notes = useSelector((state: Record<string, []>) => state.notes);
 
 	console.log(notes);
 
