@@ -1,11 +1,10 @@
 import { ReactElement, ReactNode } from 'react';
 import { render, RenderOptions } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { ThemeProvider } from 'styled-components';
-import { theme } from './assets/styles/theme';
+import { AppProviders } from './providers/AppProviders';
 
 const AllTheProviders = ({ children }: { children: ReactNode }) => {
-	return <ThemeProvider theme={theme}>{children}</ThemeProvider>;
+	return <AppProviders>{children}</AppProviders>;
 };
 
 const customRender = (ui: ReactElement, options?: Omit<RenderOptions, 'wrapper'>) =>
