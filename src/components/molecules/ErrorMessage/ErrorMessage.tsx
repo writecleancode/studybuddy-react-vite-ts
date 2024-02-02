@@ -6,7 +6,7 @@ const defaultErrorMessage = 'Something went wrong. Please try again, or contact 
 export const ErrorMessage = ({ errorMessage = defaultErrorMessage }) => {
 	return (
 		<Wrapper>
-			<StyledTitle>Ooops!</StyledTitle>
+			<StyledTitle>Ooops</StyledTitle>
 			<p>{errorMessage}</p>
 		</Wrapper>
 	);
